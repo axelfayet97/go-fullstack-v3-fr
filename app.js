@@ -1,6 +1,9 @@
 // Import d'express
+const { json } = require('express');
 const express = require('express');
 const mongoose = require('mongoose');
+
+const Thing = require('./models/Thing')
 
 mongoose.connect('mongodb+srv://axel_fayet:password1234@cluster0.ycqur.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
     useNewUrlParser: true,
@@ -21,6 +24,25 @@ app.use((req, res, next) => {
     // Permet d'envoyer des requêtes avec les méthodes mentionnées
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     // Exécution de la prochaine étape
+    next();
+});
+app.use(bodyParser.json());
+
+// Route post pour envoi d'objet
+app.post('api/stuff', (req, res, next) => {
+    // Pas besoin de l'id
+    delete req.body._id;
+    // déclaration d'un nouvel objet
+    const thing = new Thing({
+        // Copie des champs présents dans le coprs de la requête avec l'opérateur Spread
+        ...req.body
+        // == req.body.title, req.body.description, .....
+    });
+    // Enregistrement dans la base de données
+    thing.save()
+        .then(() => res.status(201).json({ message: 'Objet enregistré !' }))
+        .catch(error => res.status(400).json({ error }));
+    // next ?
     next();
 });
 
