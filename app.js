@@ -1,5 +1,13 @@
 // Import d'express
 const express = require('express');
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb+srv://axel_fayet:password1234@cluster0.ycqur.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+    .then(() => console.log('Connextion à MongoDB réussie !'))
+    .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 // Création d'une application express vide
 const app = express();
