@@ -4,6 +4,10 @@ const express = require('express');
 // Création d'une application express vide
 const app = express();
 
+// Intercepte toutes requêtes qui ont un content-type JSON, et met à dispo le corps de la requete sur l'objet requet dans req.body
+// Accès au corps de la requête == body parser
+app.use(express.json());
+
 // Middleware CORS
 app.use((req, res, next) => {
     // Autorise les accès à l'API depuis * n'importe quelle origine
@@ -16,8 +20,16 @@ app.use((req, res, next) => {
     next();
 });
 
-// Middleware contenant un tableau de nos objets
-app.use('/api/stuff', (req, res, next) => {
+//intercepte requetes post
+app.post('/api/stuff', (req, res, next) => {
+    console.log(req.body);
+    res.status(201).json({
+        message: 'Objet créé.'
+    });
+});
+
+// Middleware contenant un tableau de nos objets // Pour route GET
+app.get('/api/stuff', (req, res, next) => {
     const stuff = [
         {
             _id: 'oeihfzeoi',
