@@ -9,7 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.3",
     "http-server": "^13.0.1"
   },
   "repository": {
@@ -20,5 +19,8 @@
     "url": "https://github.com/OpenClassrooms-Student-Center/go-fullstack-v3-fr/issues"
   },
   "homepage": "https://github.com/OpenClassrooms-Student-Center/go-fullstack-v3-fr#readme",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "express": "^4.17.3"
+  }
 }
