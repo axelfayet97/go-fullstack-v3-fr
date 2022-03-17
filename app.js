@@ -34,16 +34,20 @@ app.use(bodyParser.json());
 
 // Route post pour envoi d'objet
 app.post('/api/stuff', (req, res, next) => {
+    // Pas besoin de l'id
     delete req.body._id;
+    // Nouvel objet Thing
     const thing = new Thing({
+        // Opérateur spread donnant tous les champs du body
         ...req.body
     });
+    // Methode save dans la bdd
     thing.save()
         .then(() => res.status(201).json({ message: 'Objet enregistré !' }))
         .catch(error => res.status(400).json({ error }));
 });
 
-// Middleware contenant un tableau de nos objets // Pour route GET
+// Récupération du tableau things a l'aide de la méthode find()
 app.use('/api/stuff', (req, res, next) => {
     Thing.find()
         .then(things => res.status(200).json(things))
