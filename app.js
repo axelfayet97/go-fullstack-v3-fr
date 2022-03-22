@@ -38,7 +38,7 @@ app.use(bodyParser.json());
 
 // Utilisation des routeurs
 app.use('/api/stuff', stuffRoutes);
-app.use('api/auth', userRoutes);
+app.use('/api/auth', userRoutes);
 
 // Export de l'application express
 module.exports = app;
