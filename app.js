@@ -1,9 +1,10 @@
-// Import d'express
+// Import d'express, mongoose & body parser
 const { json } = require('express');
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
+// Import des routeurs
 const stuffRoutes = require('./routes/stuff');
 const userRoutes = require('./routes/user');
 
@@ -35,6 +36,7 @@ app.use((req, res, next) => {
 });
 app.use(bodyParser.json());
 
+// Utilisation des routeurs
 app.use('/api/stuff', stuffRoutes);
 app.use('api/auth', userRoutes);
 

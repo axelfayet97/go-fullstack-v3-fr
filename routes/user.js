@@ -1,3 +1,4 @@
+// Création du contrôleur d'autehentification
 const express = require('express');
 const userCtrl = require('../controllers/user');
 const router = express.Router();

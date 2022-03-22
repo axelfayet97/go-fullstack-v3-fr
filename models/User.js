@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
+// Plugin évitant que mongoose ne génère des erreurs incompréhensibles
 const uniqueValidator = require('mongoose-unique-validator');
 
+// Schéma d'utilisateur
 const userSchema = mongoose.Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, require: true }
