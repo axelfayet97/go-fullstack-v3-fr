@@ -1,7 +1,7 @@
 // Création du contrôleur de manipulation d'objets
 const express = require('express');
 const router = express.Router();
-const stuffCtrl = require('../controlers/stuff');
+const stuffCtrl = require('../controllers/stuff');
 
 // Route post pour envoi d'objet
 router.post('/', stuffCtrl.createThing);
