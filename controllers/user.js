@@ -1,7 +1,7 @@
 // Controleurs d'authentification
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
-
+const jwt = require('jsonwebtoken');
 // Inscription
 exports.signup = (req, res, next) => {
     // Appel de la hach de bcrypt qui prend en paramètres le password renseigné, et le taux de cryptage demandé
@@ -39,7 +39,14 @@ exports.login = (req, res, next) => {
                     // Sinon, création d'un objet JSON contenant l'id et un token
                     res.status(200).json({
                         userId: user._id,
-                        token: 'TOKEN'
+                        token: jwt.sign(
+                            // Data : payload
+                            { userId: user._id },
+                            // Clé secrète
+                            'RANDOM_TOKEN_SECRET',
+                            // Argument de configuration avec expiration
+                            { expiresIn: '24h' }
+                        )
                     });
                 })
                 // Si erreur serveur
