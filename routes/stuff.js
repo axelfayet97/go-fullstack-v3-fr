@@ -2,16 +2,17 @@
 const express = require('express');
 const router = express.Router();
 const stuffCtrl = require('../controllers/stuff');
+const auth = require('../middleware/auth');
 
 // Route post pour envoi d'objet
-router.post('/', stuffCtrl.createThing);
+router.post('/', auth, stuffCtrl.createThing);
 // Modification d'un objet
-router.put('/:id', stuffCtrl.modifyThing);
+router.put('/:id', auth, stuffCtrl.modifyThing);
 // Suppression d'un objet
-router.delete('/:id', stuffCtrl.deleteThing);
+router.delete('/:id', auth, stuffCtrl.deleteThing);
 // Récupération d'un Thing spécifique
-router.get('/:id', stuffCtrl.getOneThing);
+router.get('/:id', auth, stuffCtrl.getOneThing);
 // Récupération du tableau things a l'aide de la méthode find()
-router.get('/', stuffCtrl.getAllThings);
+router.get('/', auth, stuffCtrl.getAllThings);
 
 module.exports = router;
